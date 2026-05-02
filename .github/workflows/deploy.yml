@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials
@@ -37,13 +37,24 @@ jobs:
           docker tag $ECR_REPOSITORY:latest 370613533360.dkr.ecr.ap-south-1.amazonaws.com/$ECR_REPOSITORY:latest
           docker push 370613533360.dkr.ecr.ap-south-1.amazonaws.com/$ECR_REPOSITORY:latest
 
-      - name: Download task definition
+      - name: Download and clean task definition
         run: |
           aws ecs describe-task-definition \
-          --task-definition $TASK_DEFINITION \
-          --query taskDefinition > task-def.json
+            --task-definition $TASK_DEFINITION \
+            --query taskDefinition \
+          | jq 'del(
+              .taskDefinitionArn,
+              .revision,
+              .status,
+              .requiresAttributes,
+              .compatibilities,
+              .registeredAt,
+              .registeredBy,
+              .enableFaultInjection
+            )' > task-def.json
 
       - name: Update image in task definition
+        id: render-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-def.json
@@ -53,7 +64,7 @@ jobs:
       - name: Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: task-def.json
+          task-definition: ${{ steps.render-task-def.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
