@@ -201,11 +201,7 @@ main branch push
 
 ### Run Locally
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/manjotkaurr31/AWS-based-Employee-Management-System.git
-   cd AWS-based-Employee-Management-System
-   ```
+1. SSH into EC2 Instance
 
 2. **Install dependencies**
    ```bash
@@ -226,12 +222,7 @@ main branch push
    uvicorn app.main:app --reload --port 8000
    ```
 
-5. **Initialize the database table**
-   ```bash
-   curl -X POST http://localhost:8000/init-db
-   ```
-
-### Run with Docker
+5. Containerize and Run with Docker
 
 ```bash
 docker build -t employee-api .
