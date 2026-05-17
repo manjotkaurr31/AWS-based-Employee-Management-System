@@ -55,6 +55,9 @@ Developer → GitHub Push (main)
         ├── AWS Secrets Manager  ← DB credentials
         └── PostgreSQL (RDS)     ← Employee data
 ```
+<p align="center">
+  <img src="./images/architecture.png" width="900">
+</p>
 
 ---
 
