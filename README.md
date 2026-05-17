@@ -1,6 +1,6 @@
 # AWS-Based Employee Management System
 
-A cloud-native REST API for managing employee records, built with **FastAPI** and deployed on **AWS ECS (Fargate)** via a fully automated **CI/CD pipeline** using GitHub Actions.
+A cloud-native REST API for managing employee records, built with **FastAPI** and deployed on **AWS ECS (Fargate)** via a fully automated **CI/CD pipeline** using GitHub Actions. Developed with the intent to learn and practice Cloud Network Security Engineering.
 
 ---
 
