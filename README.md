@@ -16,7 +16,6 @@ A cloud-native REST API for managing employee records, built with **FastAPI** an
 - [Getting Started](#getting-started)
 - [Environment Variables & Secrets](#environment-variables--secrets)
 - [Docker](#docker)
-- [Contributing](#contributing)
 
 ---
 
