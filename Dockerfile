@@ -2,8 +2,12 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY app/ /app/app/
+COPY requirements.txt .
 
-RUN pip install --no-cache-dir fastapi uvicorn gunicorn sqlalchemy psycopg2-binary boto3
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["gunicorn", "-w", "2", "-k", "uvicorn.workers.UvicornWorker", "app.main:app", "--bind", "0.0.0.0:8000"]
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
