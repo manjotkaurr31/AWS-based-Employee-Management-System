@@ -98,6 +98,8 @@ AWS-based-Employee-Management-System/
 │   └── workflows/
 │       └── deploy.yml   # GitHub Actions CI/CD pipeline
 ├── Dockerfile           # Container definition
+└── requirements.txt
+└── .dockerignore
 └── README.md
 ```
 
